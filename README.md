@@ -1,2 +1,0 @@
-# Webgl
-aboutWebgl
