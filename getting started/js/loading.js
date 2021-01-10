@@ -1,7 +1,6 @@
 function Gif() {
-	this.animationDuration = 0.3;
+	this.animationDuration = 1.3;
 }
-
 Gif.prototype.init = function init() {
 	this.scene = new THREE.Scene();
 	this.initCamera();
@@ -10,7 +9,7 @@ Gif.prototype.init = function init() {
 
 	this.initFloor();
 	this.createCubes();
-
+	console.log(this.scene,'111111')
 	this.render();
 };
 
@@ -37,6 +36,7 @@ Gif.prototype.initLights = function initLights() {
 	shadowlight.position.set( 0, 100, 0 );
 	shadowlight.castShadow = true;
 	shadowlight.shadowDarkness = 0.1;
+	console.log(this.scene,'22222')
 	this.scene.add(shadowlight);
 
 	var light = new THREE.DirectionalLight( 0xffffff, 1.8 );
@@ -87,4 +87,5 @@ Gif.prototype.render = function render() {
 };
 
 var cubeLoader = new Gif();
+console.log(cubeLoader,'cubeLoader');
 cubeLoader.init();
