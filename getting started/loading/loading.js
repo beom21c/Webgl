@@ -1,15 +1,14 @@
 function Gif() {
-	this.animationDuration = 1.3;
+	this.animationDuration = 0.3;
 }
+
 Gif.prototype.init = function init() {
 	this.scene = new THREE.Scene();
 	this.initCamera();
 	this.initRenderer();
 	this.initLights();
-
 	this.initFloor();
 	this.createCubes();
-	console.log(this.scene,'111111')
 	this.render();
 };
 
@@ -32,13 +31,11 @@ Gif.prototype.initRenderer = function initRenderer() {
 };
 
 Gif.prototype.initLights = function initLights() {
-	var shadowlight = new THREE.DirectionalLight( 0xffffff, 1.8 );
-	shadowlight.position.set( 0, 100, 0 );
-	shadowlight.castShadow = true;
-	shadowlight.shadowDarkness = 0.1;
-	console.log(this.scene,'22222')
-	this.scene.add(shadowlight);
-
+	/**
+	   * DirectionalLight(color : Integer, intensity : Float)
+       * color: optional, 빛의 색상, 기본값은 0xffffff(흰색) 입니다.
+       * intensity: optional, 빛의 강도, 기본값은 1.8 입니다.
+	 */
 	var light = new THREE.DirectionalLight( 0xffffff, 1.8 );
 	light.position.set( 80, 100, 90 );
 	this.scene.add(light);
@@ -48,11 +45,11 @@ Gif.prototype.initFloor = function initFloor() {
  	var geometry = new THREE.PlaneGeometry( 500, 500, 1, 1 );
 	var material = new THREE.MeshBasicMaterial( { color: 0xf1c140 } );
 	this.floor = new THREE.Mesh( geometry, material );
-	this.floor.material.side = THREE.DoubleSide;
+	// this.floor.material.side = THREE.DoubleSide;
 	this.floor.position.y = -150;
 	this.floor.rotation.x = 90*Math.PI/180;
-	this.floor.doubleSided = true;
-    this.floor.receiveShadow = true;
+	// this.floor.doubleSided = true;
+    // this.floor.receiveShadow = true;
 	this.scene.add(this.floor);
 };
 
@@ -62,7 +59,7 @@ Gif.prototype.createCubes = function createSquares() {
 
 	for (var j=0 ; j<2 ; ++j ) {
 		for (var i=0 ; i<2 ; ++i ) {
-			this.geometry = new THREE.BoxGeometry( 50, 50, 50 );
+			this.geometry = new THREE.BoxGeometry(50, 50, 50 );
 			this.material = new THREE.MeshLambertMaterial({color : 0xe0ded7, shading: THREE.FlatShading});
 			this.cube = new THREE.Mesh(this.geometry, this.material);
 			this.cube.castShadow = true;
@@ -87,5 +84,4 @@ Gif.prototype.render = function render() {
 };
 
 var cubeLoader = new Gif();
-console.log(cubeLoader,'cubeLoader');
 cubeLoader.init();
